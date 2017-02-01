@@ -1,3 +1,4 @@
+* making robust to heteroskedasticity
 clear all
 set more off
 sysuse auto
