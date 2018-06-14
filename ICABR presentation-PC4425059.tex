@@ -1,0 +1,433 @@
+
+%------------------------------------------------------------------------------%   PACKAGES AND THEMES
+%------------------------------------------------------------------------------
+
+\documentclass{beamer}
+%\documentclass[notes]{beamer}
+%\documentclass[c]{beamer}
+
+%\documentclass[c,handout]{beamer}
+\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{etoolbox}
+\usepackage{comment}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{array,booktabs,calc}
+\usepackage{booktabs} 
+\usepackage{times}
+\usepackage{pifont}
+\usepackage{verbatim}
+
+\usepackage{pgfpages}
+%\setbeamertemplate{note page}[plain]
+%\setbeameroption{show notes on second screen=right}
+
+%\beamertemplatenavigationsymbolsempty
+%\usecolortheme{beaver}
+
+\setlength\leftmargini{0cm}
+\setbeamercovered{transparent}
+
+
+\beamerdefaultoverlayspecification{<+->}
+
+\newcommand{\smallcite}[1]{\scriptsize{#1}\normalsize}
+
+
+\AtBeginSection[] {
+	\begin{frame}
+		\frametitle{Outline}
+		\tableofcontents[currentsection]
+\end{frame}}
+
+\useoutertheme{default}
+
+\usetheme{Dresden}
+  
+
+  
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{Measuring Yields from Space - early results}
+\author{Maria Jones and Mrijan Rimal}
+\institute[World Bank]
+{
+	%	\medskip
+	%	\textit{mjones5@worldbank.org} 
+	\medskip
+	\textit{joint with F. Kondylis, J. Loeser, and J. Magruder}
+}
+\date{\today}
+
+\begin{document}
+	
+\begin{frame}
+	\titlepage \vspace{-0.2cm}
+	\begin{centering}
+		\includegraphics[scale=0.25]{figs/wbg} \qquad
+		\includegraphics[scale=0.25]{figs/i2i} 
+	\end{centering}
+
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Overview} 
+	\tableofcontents 
+\end{frame}
+	
+
+%------------------------------------------------------------------------------%   PRESENTATION SLIDES
+%------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+\section{Introduction}
+
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item Traditional measurement through farm surveys is ...
+			\begin{itemize}
+				\item	time-consuming: train enumerators, reach remote households, 2.5 hours average interview
+				\item 	expensive, e.g. 150 USD per interview
+				\item 	prone to error: respondents are asked for long recall periods, have to estimate
+			\end{itemize}
+		\item Crop cuts reduce error, but are even more resource-intensive
+		\item Some areas in Rwanda are too remote for survey teams to reach.
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item Remote sensing is an appealing alternative
+			\begin{itemize}
+				\item 	reduces marginal cost
+				\item 	resolves respondent burden
+				\item 	eliminates subjective errors
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Literature}
+	\begin{itemize}
+		\item Substantial evidence that satellite imagery can provide accurate estimates of crop yields for large farms in both the developed and developing world (Lobel 2013)
+	\end{itemize}
+	\includegraphics[scale=0.35]{figs/plot1_mexico_yields}
+\end{frame}
+		
+\begin{frame}{Literature}
+	\begin{itemize}
+		\item Limited evidence on effectiveness of remote sensing for smallholder plots
+		\item Emerging evidence micro-satellite data useful for mapping maize yields in western Kenya (Burke 2017)
+			\begin{itemize}
+				\item Satellite yield estimates correlated with traditional groundbased yield measures (0.47)
+				\item Satellite yields detect positive yield responses to fertilizer and hybrid seeds
+			\end{itemize}
+		\end{itemize}
+\end{frame}
+		
+\begin{frame}{This paper}
+	\begin{itemize}
+		\item We conduct a methodological experiment to test using UAV data to monitor crop health and agricultural production
+		\item Cover 3 irrigation schemes, including all plots and a variety of crops, allowing us to test how well crops can be distinguished
+		\item Layered on top of a rigorous impact evaluation of the irrigation schemes, allowing us to take advantage of well-identified variation in productivity
+	\end{itemize}
+\end{frame}
+
+
+%----------------------------------------------------------------------------
+\section{Why UAV?}
+						
+\begin{frame}{Why UAV?}
+	\begin{itemize}
+		\item Resolution
+			\begin{itemize}
+				\item High resolution needed given very small plots (<0.2ha)
+			\end{itemize}
+		\item Cloud-free images
+			\begin{itemize}
+				\item Clouds common in the growing season
+				\item Typically need multiple satellite passes to create cloud-free images
+			\end{itemize}
+		\item Flexibility
+			\begin{itemize}
+				\item High-resolution satellite imagery requires agreement with micro-satellite company (and potentially significant cost)
+				\item Less control over timing of satellite passes than drone flights
+			\end{itemize}
+	\end{itemize}			
+\end{frame}
+			
+			
+\begin{frame}{Resolution matters}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{tabular}{|l|l|}
+			\hline 
+			Source & Resolution \\ 
+			\hline 
+			Landsat & 30m \\ 
+			\hline 
+			Sentinel & 10m \\ 
+			\hline 
+			Micro-satellites & ~1m \\ 
+			\hline 
+			UAV & 2cm \\ 
+			\hline 
+		\end{tabular} 
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+		\includegraphics[scale=0.45]{"figs/imagery resolution comparison"}
+		\end{center}
+	\end{column}
+	\end{columns}
+	
+	
+	% Mrijan - what are the sources / resolution of these 2 images? 
+
+\end{frame}
+
+\begin{frame}{Resolution matters}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.45]{figs/comppic1}
+			%1:272 Scale
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.45]{figs/comppic2}
+			%Fully zoomed in.
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+%----------------------------------------------------------------------------
+\section{Experiment}
+
+\begin{frame}{Experiment}{Implementation}
+	\begin{itemize}
+		\item We run a pilot with the Ministry of Agriculture in Rwanda to test drone data collection for the agricultural sector
+		\item Average plot size is 0.2ha, farmers grow a variety of horticultural crops, staples and bananas
+		\item Part of ongoing impact evaluation of the irrigation schemes, using a spatial regression discontinuity design
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Spatial Discontinuity Design}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textheight]{figs/hortfig}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}{Timeline}
+	\begin{center}
+		\includegraphics[width=\linewidth]{figs/timeline}
+	\end{center}
+	\begin{itemize}
+		\item One round of drone flights completed
+		\item Drone flights in dry season and follow-up survey upcoming
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}{Analytical Approach}
+	\begin{enumerate}
+		\item Classify land according to use, to identify agricultural land
+		\item Classify crops within the agricultural land
+		\item Calculate crop-level yields
+		\item Overlay with maps of sampled plots, test difference along discontinuity, and compare with self-reported crop choices and harvest
+	\end{enumerate}
+\end{frame}
+
+%----------------------------------------------------------------------------
+\section{Data}
+
+\begin{frame}[plain]{Sample}
+	\begin{figure}
+		\centering
+		\includegraphics[height=\textheight]{figs/fig0a}
+		% Mrijan - do you know how to just remove the footer?  Haven't figured it out - can make the whole page plain, but would prefer to have a title. or i can shrink the images more.
+		%Maria - Yeah [plain] makes the whole thing plain without the header. I'll figure this out.
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Sample}
+	\begin{enumerate}
+		\item Overlaid scheme with 2m grid and dropped 3000 points
+		\begin{itemize}
+			\item Removed all points within 10m of each point selected
+			\item Oversampled near the boundaries
+		\end{itemize}
+		\item Enumerators identified which points corresponded to farmland, and the name of the cultivator
+		\item Household was then interviewed, and plots mapped
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+	\begin{center}
+		\includegraphics[height=\textheight]{figs/fig3.jpg}
+	\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+	\begin{center}
+		\includegraphics[height=\textheight]{figs/fig0b.jpg}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Data}
+	\begin{itemize}
+		\item 3 large-scale hillside irrigation schemes in western Rwanda
+		\begin{itemize}
+			\item 558 ha, 570ha, 133ha
+		\end{itemize}
+		\item Sensefly eBee with a SEQUOIA+ image sensor collecting data in 4 separate bands
+		\begin{itemize}
+			\item Green (550 BP 40), Red (660 BP 40), Red Edge (735 BP 10), Near infrared (790 BP 40) and RGB
+		\end{itemize}	
+	\end{itemize}		
+\end{frame}
+
+%----------------------------------------------------------------------------
+\section{Findings}
+
+\begin{frame}{Land Classification}
+	\begin{itemize}
+		\item Land use classification was done by calculating Normalised Difference Vegetation Index(NDVI).
+		\item NDVI is based on the spectral reflectance of ground surface features and is calculated using $NDVI = \frac{NIR - RED}{NIR + RED}$
+		\item Values range from 1 to -1 where a higher value reflects presence of healthy vegetation. 		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Land Classification - NDVI}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[height=0.6\textheight]{figs/siteA}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[height=0.5\textheight]{figs/siteAzoomed}
+			\end{center}
+		\end{column}
+	\end{columns}
+	%This is the standard way of representing NDVIs. Red means no vegetation. The darker the green, the more the vegetation index of the site. Here, the dark red spots are over house roofs, light red over barren land in front of houses,  while the green is around it in the zoomed image. Image is of K-12. 
+\end{frame}
+
+\begin{frame}{Crop Classification}
+	\begin{itemize}
+		\item Random Forest Classifier Model with 64 trees.
+		\item RF model is generally the most accurate with highest accuracy levels in multi-temporal images for crop identification[Yang et al, 2017].
+		%Geo-Parcel Based Crop Identification by Integrating High Spatial-Temporal Resolution Imagery from Multi-Source Satellite Data
+		%Salehi, [Aghighi, 2018] 
+		\item Computation was done using Google Earth Engine and QGIS. 
+	\end{itemize}
+	%Random Forest Classifier Model - Random Forest is a supervised learning model(with a training dataset, and a test dataset) which creates multiple decision trees. In our test, it will create 64 decision trees with classification of crops. Each decision tree is based on a sample of the training data set and is independent of the results of the other decision trees. The final output we see is the mode classification of the 64 decision trees. For Example - for a maize plant, it'll create 64 trees with the possible classifications from random subset of of the training dataset and then creates an output based on the mode of the all the classifications. By taking the mode of the 64 trees, there is a significantly lower risk of getting a lower accuracy model compared to a model running a single decision tree.
+	
+	%While the more decision trees the better, it takes a lot of computation power to create so many decision trees, and hence there has to be some tradeoff between added accuracy and added computation time. Considering the huge amount of data we have, 64 was decided based on literature. 
+\end{frame}
+
+\begin{frame}{Training Dataset}
+	\begin{itemize}
+		\item Training dataset was created by selecting 2000 random points and manually labeling them.
+		\item Images were labeled as Banana, Maize, Horticulture, House Roof, Grass, Road, and Land.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Results}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[height=0.8\textheight]{figs/analysis}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[height=0.8\textheight]{figs/karongi}
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Results - Zoomed In}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[height=0.7\textheight]{figs/zoomedIntClassif}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includegraphics[height=0.7\textheight]{figs/zoomedInt}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}{Results - Zoomed In - Maize field}
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[height=0.8\textheight]{figs/zoomed}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[height=0.8\textheight]{figs/zoomedanalysis}
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Results}
+	\begin{itemize}
+		\item Checking the accuracy on the training dataset is 86\%.
+		\item Model is good at detecting bigger plants i.e. banana and maize.
+		\item Model still has problems distinguishing between unpaved roads, roofs, and barren land.
+		\item Model has problems completley distinguishing between young horticulture and grass. 
+	\end{itemize}
+	%To improve the model and to make the model external validity high, we still need to create a larger sample of trianing dataset so that the model can train more on the training dataset along with feature addition like irrigation variables, NDVI, and inter-temporal images. This takes us to the things to improve on the next survey round.
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Next Survey Round}
+\begin{itemize} 
+	\item Better training dataset will be created by distinguishing the exact number of crops. 
+	\begin{itemize}
+		\item For the next round of surveys, application created through ArcGIS Data collector will be used. 
+		\item Application has preselected a few thousand random geo-locations which the enumerators will fill the right crop type. This reduces training data set error.
+		\item Since this will be done during the time of the flights, different horticulture(beans, cassava, etc) will be labeled as their own leading to a more accurate model.
+	\end{itemize}
+	\item Better survey timing and inter-temporal images will provide us with a better training and working dataset. 
+\end{itemize}
+\end{frame}
+%One reason inter temporal images would provide a more robust model is that the horticulture would be a little bigger providing a better ba
+
+\begin{frame}{Next Survey Round}
+\begin{itemize} 
+	\item Intertemporal images would make the model more accurate as a training dataset with images coupled from multiple time periods would provide a more robust result. %[]Qiong 2018, Carrao et al, 2008] This is due to the fact that vegetation in different phases might display different spectral ranges based on their phase of growth. 
+	
+	\item NISR is willing to provide actual ground truth data by weighing the cut-crops so we can verify the model with the ground truth for crop prediction model. %As the end goal of the project is yield prediction, this would provide the best ground truth dataset for comparison.  
+\end{itemize}
+\end{frame}
+\begin{frame}[noframenumbering,plain]
+	\begin{center}
+		\resizebox{\textwidth}{!}{
+		\includegraphics{figs/hortfig2crop.jpg}
+		}
+		Thanks!
+	\end{center}
+\end{frame}
+
+\end{document}
